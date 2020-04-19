@@ -22,14 +22,14 @@ class Song < ActiveRecord::Base
     self.artist = artist
   end
 
-   def note_contents=(contents)
+   def note_attributes_contents=(contents)
     contents.delete_if(&:blank?).each { |content|
      if !Note.find_by(content: content, song_id: self.id)
      self.notes.build(content: content)
     end}
   end
   
-  def note_contents
+  def note_attributes_contents
     self.notes.map { |note| note.content }
   end
 end
